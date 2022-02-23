@@ -7,6 +7,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Selection {
 
 
+    /**
+     *  Implementation of RWS.
+     * @param fitnessSum Sum of all agent's score
+     * @param window The window of the game
+     * @param players List of players
+     * @return The selected agent
+     */
     public Player rws(float fitnessSum, PApplet window,Player[]players){
         int index=1;
         float weights[]=new float[players.length];
@@ -35,6 +42,11 @@ public class Selection {
     }
 
 
+    /**
+     * Implementation of tournament selection
+     * @param players list of players
+     * @return The selected agent
+     */
     public Player tournament(Player[]players){
         Random random=new Random();
         int a=random.nextInt(players.length);
@@ -49,7 +61,13 @@ public class Selection {
             return players[b];
     }
 
-
+    /**
+     *  Implementation of TRWS.
+     * @param fitnessSum Sum of all agent's score
+     * @param window The window of the game
+     * @param players List of players
+     * @return The selected agent
+     */
     public Player TRWS(float fitnessSum, PApplet window, Player[]players){
         Random random=new Random();
         if(random.nextBoolean()){

@@ -34,11 +34,19 @@ public class Network {
         this.bias = bias;
     }
 
+    /**
+     * Generate weight bias when a player is created
+     */
     public void GenerateWeight(){
         networkLogic.GenerateWeight(outputLayer);
         bias = Tools.GenerateRandom();
     }
 
+    /**
+     * Input layer process the information
+     * @param catcuses list of obstacles
+     * @param dinosaur the player
+     */
     public void process(LinkedList<Catcus> catcuses, Player dinosaur){
        networkLogic.process(catcuses,dinosaur,bias,inputLayer);
     }
@@ -51,6 +59,10 @@ public class Network {
    return networkLogic.cloneNetwork(outputLayer,bias);
     }
 
+    /**
+     * Implementation of mutation
+     * @param mutationRate mutation rate
+     */
     public void mutation(double mutationRate){
         networkLogic.mutation(outputLayer,mutationRate);
         if (MainLoop.window.random(1) < mutationRate) {

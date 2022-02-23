@@ -18,6 +18,10 @@ public class MainLoop extends PApplet {
     }
 
 
+    /**
+     * Allow user to enter inputs for number of population , elitism or non-elitism
+     * ,selection algorithm ,activation function , mutation rate
+     */
     @Override
     public void setup(){
         Scanner scanner=new Scanner(System.in);
@@ -36,11 +40,16 @@ public class MainLoop extends PApplet {
         GA = new GA(population,type,elitism);
     }
 
+
+    /**
+     * It starts the process of the genetic when the game is over.
+     * else update all the objects in the games
+     */
     @Override
     public void draw(){
-        background(255);
+        background(255);//the background color of the game
         fill(0);
-        line(0,height- GA.getGroundHeight() , width, height- GA.getGroundHeight());
+        line(0,height- GA.getGroundHeight() , width, height- GA.getGroundHeight());// the ground in the game
         if(GA.GameOver()){
             GA.selection();
             GA.mutation(mutation);

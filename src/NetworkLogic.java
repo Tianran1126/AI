@@ -2,6 +2,10 @@ import java.util.LinkedList;
 
 public class NetworkLogic {
 
+    /**
+     * generate weight for the player
+     * @param outputLayer outputlayer
+     */
     public void GenerateWeight(OutputNeuron outputLayer ){
 
         for(int i = 0; i < outputLayer.getLinkweights().length; i++) {
@@ -9,6 +13,11 @@ public class NetworkLogic {
         }
     }
 
+    /**
+     * initiate inputs of input neurons
+     * @param inputLayer input layer
+     * @param outputLayer output layer
+     */
     public void startNetwork(InputNeuron[] inputLayer, OutputNeuron outputLayer){
         for(int i = 0; i < inputLayer.length; i++){
             inputLayer[i] = new InputNeuron();
@@ -17,6 +26,13 @@ public class NetworkLogic {
         outputLayer.setInput(inputLayer);
     }
 
+    /**
+     * set inputs value of input layer
+     * @param catcuses list of obstacles
+     * @param dinosaur player
+     * @param bias bias
+     * @param inputLayer input layer
+     */
     public void process(LinkedList<Catcus> catcuses, Player dinosaur, double bias, InputNeuron[] inputLayer){
             inputLayer[0].setInput(catcuses.get(0).getPosition().x);
             inputLayer[1].setInput(catcuses.get(0).getCatusSize().x );
@@ -37,6 +53,11 @@ public class NetworkLogic {
         return network;
     }
 
+    /**
+     * Implementation of mutation
+     * @param outputLayer output layer
+     * @param mutationRate mutation rate
+     */
     public void mutation(OutputNeuron outputLayer, double mutationRate){
         for (int i = 0; i < outputLayer.getLinkweights().length; i++) {
             if (MainLoop.window.random(1) < mutationRate) {

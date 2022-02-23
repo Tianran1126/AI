@@ -36,6 +36,10 @@ public class GA {
     }
 
 
+    /**
+     * Generate the first population for genetic algorithm.
+     * @param population size of the population
+     */
     public void initialPopulation(int population) {
         this.population = population;
         players = new Player[population];
@@ -44,14 +48,20 @@ public class GA {
         }
     }
 
+    /**
+     * Render all the objects in the game
+     */
     public void showObjects() {
         max = gamelogic.showObjects(players, catcuses, groundHeight, window);
         window.fill(0);
         window.textSize(20);
-        window.text("Score: " + max, MainLoop.window.width - 200, 30);
-        window.text("Generations: " + generations, MainLoop.window.width - 200, 60);
+        window.text("Score: " + max, MainLoop.window.width - 200, 30);// render score
+        window.text("Generations: " + generations, MainLoop.window.width - 200, 60);//render number of generations
     }
 
+    /**
+     * update movement of all the objects in the game.
+     */
     public void update() {
 
 
@@ -61,6 +71,10 @@ public class GA {
     }
 
 
+    /**
+     * Record the status of the game
+     * @return return true when game is over. otherwsie false
+     */
     public boolean GameOver() {
         for (Player player : players) {
             if (!player.playerDeath()) {
@@ -71,6 +85,10 @@ public class GA {
         return true;
     }
 
+    /**
+     * find the highest score in the generation
+     * @return the highest score
+     */
     private float findMax() {
         float max = 0;
         for (Player player : players) {
@@ -81,6 +99,11 @@ public class GA {
         return max;
     }
 
+    /**
+     * Elitism stage of the genetic algorithm
+     * @param newDino the new generation of agents
+     * @return return the number of agents with highest score
+     */
     private int elitism(Player[] newDino) {
         int number = 0;
         for (Player player : players) {
@@ -91,6 +114,10 @@ public class GA {
         return number;
     }
 
+    /**
+     * Calculate the fitness sum of the population.
+     * @return return the fitness sum
+     */
     private float calculateFitnessSum(){
         float fitnessSum=0;
         for (Player player : players) {
@@ -99,6 +126,9 @@ public class GA {
         return fitnessSum;
     }
 
+    /**
+     * Selection stage of the genetic algorithm
+     */
     public void selection() {
         float fitnessSum=calculateFitnessSum();
         Player[] newDino = new Player[players.length];//next gen
@@ -139,6 +169,10 @@ public class GA {
         }
     }
 
+    /**
+     * Perform mutation to the new population of agents
+     * @param rate mutation rate
+     */
 
     public void mutation(double rate) {
         for (Player player : players) {
